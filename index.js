@@ -1,0 +1,10 @@
+const express = require('express');
+const helpRoutes = require('./routes/helpRoutes');
+
+var app = express();
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+});
+
+app.use(helpRoutes);
