@@ -1,23 +1,20 @@
-const fs = require('fs');
+import fs from 'fs';
 
-module.exports.log = (req, res, next) => {
-    console.log('log to route on' + Date());
-    // sync code
-    // let fileData = fs.readFileSync('./logs.txt', 'utf8');
-    // fs.writeFileSync('./logs.txt', 'utf8');
-    // console.log(fileData);
+export const logger = (req, res, next) => {
+    fs.readFile('./logs/logs.txt', 'utf8', (err, data) => {
 
-    // async code write code
-
-    let newData = 'Log entry at ' + Date();
-
-    fs.writeFile('./logs.txt', newData, (err) => {
-        if (err) throw err;
-        console.log('Data written');
+        // טיפול בשגיאה אם קיימת
+        if (err) throw err; 
+        
+        // הוספת רשומה חדשה    
+        let newData = data + '\nLog entry at ' + Date();
+      
+        // כתיבה חזרה לקובץ
+        fs.writeFile('./logs.txt', newData, (err) => {
+          if (err) throw err;
+          console.log('Log updated!'); 
+          next();
+        });
+      
     });
-
-    console.log('Done!');
-
-
-    next();
 }

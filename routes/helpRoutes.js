@@ -1,17 +1,10 @@
-const { Router } = require('express');
-
+import { Router } from 'express';
+import { logger } from '../middlewares/logMiddleware.js';
 const router = Router();
-const logMiddleware = require("../middlewares/logMiddleware");
-const log = logMiddleware.log;
 
-const logger = function (req, res, next) {
-    console.log('Someone entered to help in time: ', Date.now());
-    next();
-  };
+router.use(logger);
 
-  router.use(logger);
-
-router.get('/help', log, function (req, res, next) {
+router.get('/help', function (req, res, next) {
     res.status(200).send('do you need any help?');
 
 });
@@ -27,4 +20,4 @@ router.get('/helpBy', function (req, res, next) {
 });
 
 
-module.exports = router;
+export default router;
