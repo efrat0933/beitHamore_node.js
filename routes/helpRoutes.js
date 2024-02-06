@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { logger } from '../middlewares/logMiddleware.js';
+import { addProduct } from '../controllers/producsController.js';
 const router = Router();
 
 router.use(logger);
@@ -18,6 +19,8 @@ router.get('/helpBy', function (req, res, next) {
     res.status(200).send('byebye');
 
 });
+
+router.post('/product', addProduct);
 
 
 export default router;
