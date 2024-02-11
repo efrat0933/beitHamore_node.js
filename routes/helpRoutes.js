@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { logger } from '../middlewares/logMiddleware.js';
-import { addProduct } from '../controllers/producsController.js';
+import { addProduct } from '../controllers/producsController.js'; 
+import { createUser, getUserById, updateUser } from '../controllers/userController.js';
 const router = Router();
 
 router.use(logger);
@@ -22,5 +23,10 @@ router.get('/helpBy', function (req, res, next) {
 
 router.post('/product', addProduct);
 
+router.post('/user', createUser);
+
+router.get('/user/:id', getUserById);
+
+router.put('/user/:id', updateUser);
 
 export default router;
