@@ -46,3 +46,15 @@ export const updateUser = async function (req, res) {
     user.save();
     res.send(user);
 }
+
+
+export const getAllUsers = async function(req, res) {
+    res.status(401).send();
+    try {
+       const users = await userModel.find(); 
+       res.send(users);
+    } catch (err) {
+        res.send(err)
+    }
+     
+}
